@@ -1,0 +1,20 @@
+﻿.series-info-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.series-info-container .series-poster {
+    padding: 10px;
+}
+
+.series-info-container .series-poster img {
+    width: 280px;
+    height: 330px;
+}
+
+.series-info-container .series-info {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}

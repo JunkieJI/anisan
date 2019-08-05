@@ -1,0 +1,26 @@
+﻿@model List<anisan.Models.Series>
+@{
+    ViewData["Title"] = "Series";
+}
+@foreach(var series in Model)
+{
+    <div class="series-container">
+        <h2>@series.Title</h2>
+
+        <div class="series-info-container">
+            <div class="series-poster">
+                <img src="@series.PosterImage" />
+            </div>
+            <div class="series-info">
+                <p>Air-Date: @series.StartDate</p>
+                @if (!String.IsNullOrEmpty(series.EndDate))
+                {
+                    <p>Finale-Date: @series.EndDate</p>
+                }
+                <p>Status: @series.Status</p>
+                <p>Synopsis: @series.Synopsis</p>
+            </div>
+        </div>
+   </div>
+}
+
