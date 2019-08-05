@@ -23,7 +23,6 @@ namespace anisan.Controllers
         public async Task<ViewResult> Index()
         {
 
-            // Added comment
             string response = await GetAnime();
             JObject res = JObject.Parse(response);
             foreach (var r in res["data"])
