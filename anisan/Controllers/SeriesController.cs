@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using anisan.Models;
 using Newtonsoft.Json.Linq;
 
@@ -12,12 +13,13 @@ namespace anisan.Controllers
     public class SeriesController : Controller
     {
         private readonly List<Series> _series = new List<Series>();
-        private readonly string url = "https://kitsu.io/api/edge/anime";
         private HttpClient client = new HttpClient();
-        public SeriesController()
+        private IConfiguration configuration;
+        public SeriesController(IConfiguration IConfig)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             client.DefaultRequestHeaders.Accept.Clear();
+            configuration = IConfig;
         }
         // GET: /series/
         public async Task<ViewResult> Index()
@@ -52,6 +54,7 @@ namespace anisan.Controllers
 
         private async Task<String> GetAnime()
         {
+            String url = configuration.GetSection("Api").GetSection("Host").Value + configuration.GetSection("Api").GetSection("Path").Value;
             var result = await client.GetAsync(url);
             if (result.IsSuccessStatusCode)
             {
